@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx1xehnj8kqq1"]
+
+[ext_resource type="Texture2D" uid="uid://dit84odfh2cky" path="res://Assets/locked_door.png" id="1_lygba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okh6t"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rs6oa"]
+size = Vector2(32, 16)
+
+[node name="LockedDoor" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_okh6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_lygba")
+
+[node name="Locked" type="Area2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Locked"]
+shape = SubResource("RectangleShape2D_rs6oa")
+metadata/_edit_group_ = true

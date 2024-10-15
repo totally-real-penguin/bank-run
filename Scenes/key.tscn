@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqhvt3uawqu0j"]
+
+[ext_resource type="Texture2D" uid="uid://cqj3huphcl707" path="res://Assets/treasure.png" id="1_i327j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmm23"]
+size = Vector2(22, 10)
+
+[node name="Key" type="Area2D"]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_lmm23")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_i327j")
+centered = false
+region_enabled = true
+region_rect = Rect2(32, 64, 32, 16)

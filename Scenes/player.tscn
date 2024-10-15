@@ -1,0 +1,201 @@
+[gd_scene load_steps=17 format=3 uid="uid://ye5l8jqx80oa"]
+
+[ext_resource type="Texture2D" uid="uid://cq2hd1qereqex" path="res://Assets/character.png" id="1_kjn7e"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_olq43"]
+[ext_resource type="FontFile" uid="uid://dod3gokcptgrt" path="res://Style/BitPotionExt.ttf" id="3_r2c7i"]
+[ext_resource type="AudioStream" uid="uid://46paqxxjcr1v" path="res://Sounds/Coin.wav" id="4_78ahq"]
+[ext_resource type="AudioStream" uid="uid://cmlhx01pjp2lx" path="res://Sounds/Jump.wav" id="5_56287"]
+[ext_resource type="Texture2D" uid="uid://cqj3huphcl707" path="res://Assets/treasure.png" id="6_6d0i6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3gex"]
+size = Vector2(7, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8f77"]
+size = Vector2(15, 18)
+
+[sub_resource type="Theme" id="Theme_2h5ao"]
+default_font = ExtResource("3_r2c7i")
+
+[sub_resource type="Theme" id="Theme_odb3p"]
+default_font = ExtResource("3_r2c7i")
+default_font_size = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6ge1"]
+size = Vector2(2, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf3dt"]
+size = Vector2(2, 14)
+
+[sub_resource type="Animation" id="Animation_oples"]
+resource_name = "Idle"
+length = 0.0333367
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_35eyx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l4eof"]
+resource_name = "Run"
+length = 2.00003
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1.01519, 1.26519, 1.51519, 1.76519),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eldg3"]
+_data = {
+"Idle": SubResource("Animation_oples"),
+"RESET": SubResource("Animation_35eyx"),
+"Run": SubResource("Animation_l4eof")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_olq43")
+max_speed = 160
+acceleration = 500
+gravity = 600
+max_fall_speed = 180
+jump_power = 260
+rebound = 140
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(8, 8)
+texture = ExtResource("1_kjn7e")
+hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(8.5, 9)
+shape = SubResource("RectangleShape2D_y3gex")
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_bottom = 144
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="TreasureDetector" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="TreasureDetector"]
+position = Vector2(8.5, 8)
+shape = SubResource("RectangleShape2D_v8f77")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2h5ao")
+
+[node name="VBox" type="VBoxContainer" parent="GUI/Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 58.0
+offset_bottom = 42.0
+
+[node name="Score" type="Label" parent="GUI/Control/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Score: 00000"
+
+[node name="Time" type="Label" parent="GUI/Control/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_odb3p")
+text = "Time: 02:30"
+
+[node name="Exit" type="Label" parent="GUI/Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 116.0
+offset_top = 2.0
+offset_right = 156.0
+offset_bottom = 25.0
+text = "Exit"
+
+[node name="LeftWallDectector" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="LeftWallDectector"]
+position = Vector2(4, 9)
+shape = SubResource("RectangleShape2D_a6ge1")
+
+[node name="CountDown" type="Timer" parent="."]
+autostart = true
+
+[node name="GemCollect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_78ahq")
+volume_db = -20.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_56287")
+volume_db = -20.0
+
+[node name="RightWallDectector" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="RightWallDectector"]
+position = Vector2(13, 9)
+shape = SubResource("RectangleShape2D_hf3dt")
+
+[node name="CoyoteJump" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="BufferJump" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eldg3")
+}
+
+[node name="Key" type="Sprite2D" parent="."]
+position = Vector2(-10, 9)
+texture = ExtResource("6_6d0i6")
+region_enabled = true
+region_rect = Rect2(32, 64, 32, 16)
+
+[connection signal="area_entered" from="TreasureDetector" to="." method="_on_treasure_detector_area_entered"]
+[connection signal="body_entered" from="LeftWallDectector" to="." method="_on_left_wall_dectector_body_entered"]
+[connection signal="body_exited" from="LeftWallDectector" to="." method="_on_left_wall_dectector_body_exited"]
+[connection signal="timeout" from="CountDown" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="RightWallDectector" to="." method="_on_right_wall_dectector_body_entered"]
+[connection signal="body_exited" from="RightWallDectector" to="." method="_on_right_wall_dectector_body_exited"]

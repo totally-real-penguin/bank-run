@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dqoox2k4gg1qo"]
+
+[ext_resource type="StyleBox" uid="uid://smol7fvnalcp" path="res://Style/defualt_box.tres" id="1_xt7l4"]
+[ext_resource type="FontFile" uid="uid://dod3gokcptgrt" path="res://Style/BitPotionExt.ttf" id="2_8gd32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxbpr"]
+
+[resource]
+default_font = ExtResource("2_8gd32")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/disabled = ExtResource("1_xt7l4")
+Button/styles/focus = ExtResource("1_xt7l4")
+Button/styles/hover = ExtResource("1_xt7l4")
+Button/styles/normal = ExtResource("1_xt7l4")
+Button/styles/pressed = ExtResource("1_xt7l4")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_pxbpr")

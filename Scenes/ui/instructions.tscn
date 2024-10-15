@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://qtbo5jpiwts"]
+
+[ext_resource type="Theme" uid="uid://dqoox2k4gg1qo" path="res://Style/defualt.tres" id="1_gk2jn"]
+[ext_resource type="FontFile" uid="uid://dvv5k806thlbe" path="res://Style/m3x6.ttf" id="2_g61qa"]
+[ext_resource type="Script" path="res://Scripts/ui/instructions.gd" id="2_iky3c"]
+
+[sub_resource type="FontVariation" id="FontVariation_1vt35"]
+base_font = ExtResource("2_g61qa")
+spacing_space = -2
+spacing_top = -4
+spacing_bottom = -2
+
+[node name="Instructions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gk2jn")
+script = ExtResource("2_iky3c")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Start" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+offset_left = 216.0
+offset_top = 120.0
+offset_right = 248.0
+offset_bottom = 136.0
+text = "Start"
+icon_alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 93.0
+offset_bottom = 20.0
+bbcode_enabled = true
+text = "Instructions:"
+scroll_active = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 31.0
+offset_right = 241.0
+offset_bottom = 89.0
+theme_override_fonts/font = SubResource("FontVariation_1vt35")
+theme_override_font_sizes/font_size = 16
+text = "You have to be fast if time runs out you get caught you lose all score you have gained.
+
+so get in grab as much as you can and get out
+
+wasd/arrow keys to move
+space or z to jump"
+autowrap_mode = 2
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
